@@ -1,5 +1,7 @@
 package com.harsha.Ecommerce.Service;
 
+import com.harsha.Ecommerce.Exceptions.APIException;
+import com.harsha.Ecommerce.Exceptions.ResourceNotFoundException;
 import com.harsha.Ecommerce.Model.Category;
 import com.harsha.Ecommerce.Respository.CategoryRespository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +24,16 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public void createCategory(Category category) {
-
+        Category savedCategory = categoryRespository.findByCategoryName(category.getCategoryName());
+        if(savedCategory!=null)
+            throw new APIException("Category with the name"+category.getCategoryName()+" already exists");
         categoryRespository.save(category);
 
     }
 
 
     public String deleteCategory(Long categoryId){
-        Category category = categoryRespository.findById(categoryId).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Category category = categoryRespository.findById(categoryId).orElseThrow(()->new ResourceNotFoundException("category","categoryId",categoryId));
         categoryRespository.delete(category);
         return "Category with CategoryId "+categoryId+" is deleted.";
     }
@@ -38,7 +42,7 @@ public class CategoryServiceImpl implements CategoryService{
 @Override
     public Category updateCategory(Category category,Long categoryId){
 
-        Category savedCategory = categoryRespository.findById(categoryId).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Category savedCategory = categoryRespository.findById(categoryId).orElseThrow(()-> new ResourceNotFoundException("category","categoryId",categoryId));
         category.setCategoryId(categoryId);
         savedCategory = categoryRespository.save(category);
         return savedCategory;
