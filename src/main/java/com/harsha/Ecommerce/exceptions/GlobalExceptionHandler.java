@@ -1,4 +1,4 @@
-package com.harsha.Ecommerce.Exceptions;
+package com.harsha.Ecommerce.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

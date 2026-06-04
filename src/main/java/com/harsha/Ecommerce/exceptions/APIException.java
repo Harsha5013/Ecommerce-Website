@@ -1,4 +1,4 @@
-package com.harsha.Ecommerce.Exceptions;
+package com.harsha.Ecommerce.exceptions;
 
 public class APIException extends RuntimeException{
     private static final long serialVersionUID=1L;

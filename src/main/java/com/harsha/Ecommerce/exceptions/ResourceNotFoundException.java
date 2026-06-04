@@ -1,4 +1,4 @@
-package com.harsha.Ecommerce.Exceptions;
+package com.harsha.Ecommerce.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException{
     String ResourceName;

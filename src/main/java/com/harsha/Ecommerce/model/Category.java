@@ -1,11 +1,10 @@
-package com.harsha.Ecommerce.Model;
+package com.harsha.Ecommerce.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity(name = "categories")
@@ -16,7 +15,11 @@ public class Category {
     @NotBlank
     @Size(min = 5,message = "the category name should be atleast 5 characters.")
     private String categoryName;
+    private String categoryno;
 
+    public Category(String categoryno) {
+        this.categoryno = categoryno;
+    }
 
     public Category() {
     }
@@ -26,6 +29,13 @@ public class Category {
         this.categoryName = categoryName;
     }
 
+    public String getCategoryno() {
+        return categoryno;
+    }
+
+    public void setCategoryno(String categoryno) {
+        this.categoryno = categoryno;
+    }
 
     public Long getCategoryId() {
         return categoryId;
