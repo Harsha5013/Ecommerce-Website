@@ -1,5 +1,6 @@
 package com.harsha.Ecommerce.exceptions;
 
+import com.harsha.Ecommerce.payload.APIResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -24,15 +25,17 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<String> ResourceNotFoundException(ResourceNotFoundException e){
-        String message = e.getMessage();
-        return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
+    public ResponseEntity<APIResponse> ResourceNotFoundException(ResourceNotFoundException e){
+        String message=e.getMessage();
+        APIResponse apiResponse = new APIResponse(message,false);
+        return new ResponseEntity<>(apiResponse,HttpStatus.NOT_FOUND);
 
     }
     @ExceptionHandler(APIException.class)
-    public ResponseEntity<String> APIException(APIException e){
+    public ResponseEntity<APIResponse> APIException(APIException e){
         String message = e.getMessage();
-        return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
+        APIResponse apiResponse = new APIResponse(message,false);
+        return new ResponseEntity<>(apiResponse,HttpStatus.BAD_REQUEST);
 
     }
 
